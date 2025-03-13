@@ -6,37 +6,82 @@
     <title>Stylische Webpage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes rain {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
         body {
-            background-image: url('https://source.unsplash.com/random/1600x900/?rain');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            animation: rain 10s linear infinite;
+            background-color: #0a0a0a;
+            overflow: hidden;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
-        .animate-fadeIn {
-            animation: fadeIn 1s ease-in-out;
+        .drop {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .phone {
+            position: relative;
+            width: 375px;
+            height: 667px;
+            background-color: #000;
+            border-radius: 40px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .phone-header {
+            height: 50px;
+            background-color: #333;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+        .phone-body {
+            padding: 10px;
+            height: calc(100% - 50px);
+            overflow: hidden;
         }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
-
+    <div class="rain"></div>
+    <script>
+        function createRain() {
+            const rainContainer = document.querySelector(".rain");
+            for (let i = 0; i < 100; i++) {
+                let drop = document.createElement("div");
+                drop.classList.add("drop");
+                drop.style.left = `${Math.random() * 100}vw`;
+                drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                rainContainer.appendChild(drop);
+            }
+        }
+        createRain();
+    </script>
+    
     <!-- HERO SECTION -->
-    <section class="h-screen flex flex-col items-center justify-center text-center px-6">
-        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen auf der <span class="text-blue-400">geilsten Website!</span></h1>
+    <section class="h-screen flex flex-col items-center justify-center text-center px-6 relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen auf der <span class="text-blue-400">hartesten Website!</span></h1>
         <p class="mt-4 text-lg md:text-2xl text-gray-300 animate-fadeIn">Modern, schnell & stilvoll – genau wie du es willst.</p>
         <a href="#features" class="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-lg transition duration-300 animate-fadeIn">Mehr erfahren</a>
     </section>
-
+    
     <!-- FEATURE SECTION -->
-    <section id="features" class="py-16 bg-gray-800 text-center">
+    <section id="features" class="py-16 bg-gray-800 text-center relative z-10">
         <h2 class="text-4xl font-bold mb-6">Warum diese Website?</h2>
         <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
             <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
@@ -53,11 +98,16 @@
             </div>
         </div>
     </section>
-
-    <!-- DISCORD WIDGET -->
-    <section class="flex justify-center items-center py-16">
-        <iframe src="https://discord.com/widget?id=1343649971517526066&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    
+    <!-- PHONE SECTION -->
+    <section class="flex justify-center items-center py-16 relative z-10">
+        <div class="phone">
+            <div class="phone-header"></div>
+            <div class="phone-body">
+                <!-- DISCORD WIDGET -->
+                <iframe src="https://discord.com/widget?id=1343649971517526066&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
     </section>
-
 </body>
 </html>
