@@ -3,260 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodboy Service Website</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0a0a0a;
-            font-family: 'Orbitron', sans-serif;
-            color: white;
-            margin: 0;
-            overflow-x: hidden;
-        }
-
-        /* Intro Screen */
-        .intro {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-            color: cyan;
-            text-shadow: 0 0 20px cyan;
-            animation: fadeOut 3s forwards 2s;
-            z-index: 2000;
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #111;
-            box-shadow: 0 4px 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            color: cyan;
-            text-shadow: 0 0 10px cyan;
-        }
-
-        /* Warenkorb */
-        .cart-icon {
-            width: 50px;
-            height: 50px;
-            background-color: cyan;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            font-size: 24px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 5px 10px;
-            font-size: 14px;
-        }
-
-        /* Produktliste */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 40px;
-        }
-
-        .product-card {
-            background-color: #222;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 1);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .add-to-cart {
-            background-color: black;
-            color: cyan;
-            padding: 10px 20px;
-            border: 2px solid cyan;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            text-shadow: 0 0 10px cyan;
-            transition: 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background-color: cyan;
-            color: black;
-            box-shadow: 0 0 20px cyan;
-        }
-
-        /* Warenkorb Overlay */
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 300px;
-            height: 100%;
-            background: #111;
-            box-shadow: -5px 0 15px rgba(0, 255, 255, 0.5);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            color: white;
-        }
-
-        .cart-overlay.active {
-            right: 0;
-        }
-
-        .cart-close {
-            align-self: flex-end;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-        .cart-items {
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid cyan;
-        }
-
-        .cart-total {
-            font-weight: bold;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        .cart-clear {
-            background: red;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-    </style>
+    <title>Fortnite Fan-Seite</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Intro Screen -->
-    <div class="intro">Willkommen bei Goodboy Service...</div>
+    <!-- Navigationsmenü -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Über Fortnite</a></li>
+            <li><a href="#news">Neuigkeiten</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
 
-    <!-- Header mit Warenkorb -->
-    <header class="header">
-        <h1>Goodboy Service</h1>
-        <div class="cart-icon" onclick="toggleCart()">
-            🛒
-            <span id="cart-count" class="cart-count">0</span>
+    <!-- Hauptbereich -->
+    <header id="home">
+        <div class="container">
+            <h1>Willkommen auf der Fortnite Fan-Seite!</h1>
+            <p>Bleib immer auf dem Laufenden und entdecke alles über Fortnite – vom Spiel bis zu den neuesten Skins!</p>
         </div>
     </header>
 
-    <!-- Produktbereich -->
-    <section class="products" id="product-container"></section>
+    <!-- Über Fortnite Bereich -->
+    <section id="about">
+        <div class="container">
+            <h2>Über Fortnite</h2>
+            <p>Fortnite ist ein populäres Battle-Royale-Spiel von Epic Games, das Millionen von Spielern weltweit begeistert. Es bietet verschiedene Spielmodi, darunter den beliebten "Battle Royale"-Modus, der es Spielern ermöglicht, gegeneinander anzutreten, um der letzte Überlebende zu sein.</p>
+            <img src="https://via.placeholder.com/600x300" alt="Fortnite Bild" />
+        </div>
+    </section>
 
-    <!-- Warenkorb Overlay -->
-    <div class="cart-overlay" id="cart-overlay">
-        <span class="cart-close" onclick="toggleCart()">✖</span>
-        <h2>Warenkorb</h2>
-        <div class="cart-items" id="cart-items"></div>
-        <p class="cart-total" id="cart-total">Gesamt: 0.00€</p>
-        <div class="cart-clear" onclick="clearCart()">Warenkorb leeren</div>
-    </div>
+    <!-- Neuigkeiten Bereich -->
+    <section id="news">
+        <div class="container">
+            <h2>Neueste Nachrichten</h2>
+            <div class="news-item">
+                <h3>Season 8 ist da!</h3>
+                <p>Die neue Saison bringt aufregende Veränderungen mit sich, darunter neue Skins, Waffen und eine völlig neue Karte! Jetzt spielen und entdecken!</p>
+            </div>
+            <div class="news-item">
+                <h3>Neues Event: Fortnite World Cup!</h3>
+                <p>Der Fortnite World Cup steht vor der Tür! Sei dabei und erlebe, wie Spieler aus aller Welt um den Titel kämpfen.</p>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        let cart = [];
-        
-        const products = [
-            { id: 1, name: "Gaming-Headset", price: 4.99, img: "https://source.unsplash.com/400x300/?gaming,headset" },
-            { id: 2, name: "Bluetooth Lautsprecher", price: 3.99, img: "https://source.unsplash.com/400x300/?speaker,bluetooth" },
-            { id: 3, name: "Smartphone Hülle", price: 4.49, img: "https://source.unsplash.com/400x300/?phone,case" },
-            { id: 4, name: "Stylische Sonnenbrille", price: 4.00, img: "https://source.unsplash.com/400x300/?sunglasses" },
-            { id: 5, name: "Smartwatch Armband", price: 2.99, img: "https://source.unsplash.com/400x300/?smartwatch" },
-            { id: 6, name: "Powerbank", price: 5.00, img: "https://source.unsplash.com/400x300/?powerbank" }
-        ];
+    <!-- Shop Bereich -->
+    <section id="shop">
+        <div class="container">
+            <h2>Fortnite Shop</h2>
+            <p>Hol dir die neuesten Skins und Items für dein Fortnite-Spielerlebnis. Besuche den In-Game-Shop und finde dein neues Outfit!</p>
+            <button onclick="window.location.href='https://www.epicgames.com/fortnite/de/home'">Zum Shop</button>
+        </div>
+    </section>
 
-        function renderProducts() {
-            const container = document.getElementById("product-container");
-            container.innerHTML = "";
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.classList.add('product-card');
-                card.innerHTML = `<img src="${product.img}" class="product-img"><h3>${product.name}</h3><p>${product.price.toFixed(2)}€</p><button class="add-to-cart" onclick="addToCart(${product.id})">In den Warenkorb</button>`;
-                container.appendChild(card);
-            });
-        }
+    <!-- Kontaktformular -->
+    <section id="contact">
+        <div class="container">
+            <h2>Kontakt</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Nachricht:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Absenden</button>
+            </form>
+            <p id="form-message"></p>
+        </div>
+    </section>
 
-        function addToCart(productId) {
-            cart.push(products.find(p => p.id === productId));
-            updateCart();
-        }
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fortnite Fan-Seite. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
 
-        function clearCart() {
-            cart = [];
-            updateCart();
-        }
-
-        function updateCart() {
-            document.getElementById("cart-count").innerText = cart.length;
-            document.getElementById("cart-items").innerHTML = cart.map(item => `<div class="cart-item"><span>${item.name}</span> <span>${item.price.toFixed(2)}€</span></div>`).join("");
-            document.getElementById("cart-total").innerText = `Gesamt: ${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}€`;
-        }
-
-        function toggleCart() {
-            document.getElementById("cart-overlay").classList.toggle("active");
-        }
-
-        window.onload = renderProducts;
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
