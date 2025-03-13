@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>GoodBoyService - Mitigierte Produkte</title>
+    <title>GoodBoyService - Die Besten Tools!</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
     <style>
         /* Allgemeine Styles */
@@ -14,7 +14,8 @@
             padding: 0;
             background: linear-gradient(135deg, #111, #1a1a1a);
             color: #fff;
-            overflow: hidden; /* Verhindert das Scrollen */
+            overflow-y: auto; /* Ermöglicht Scrollen */
+            height: 100vh;
         }
 
         /* Header */
@@ -219,6 +220,35 @@
         .drop:nth-child(even) {
             animation-duration: 1s;
         }
+
+        /* Warenkorb Sektion */
+        #cart {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            text-align: center;
+            display: none;
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        #cart h3 {
+            color: #007bff;
+            font-size: 2rem;
+        }
+
+        #cart ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #cart ul li {
+            margin: 10px 0;
+            color: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -226,7 +256,7 @@
     <!-- Header -->
     <header>
         <h1>Willkommen bei GoodBoyService!</h1>
-        <p>Dein Shop für die besten Mitigierten Technologie-Produkte</p>
+        <p>Dein Shop für die besten Tools🤫</p>
     </header>
 
     <!-- Navigation -->
@@ -276,6 +306,15 @@
         </div>
     </section>
 
+    <!-- Warenkorb -->
+    <div id="cart">
+        <h3>Dein Warenkorb</h3>
+        <ul id="cartItemsList"></ul>
+        <button onclick="checkout()">Zur Kasse</button>
+        <button onclick="closeCart()">Schließen</button>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 GoodBoyService. Alle Rechte vorbehalten.</p>
     </footer>
@@ -286,7 +325,7 @@
     </a>
 
     <!-- Warenkorb Button -->
-    <a href="#cart" target="_blank">
+    <a href="javascript:void(0)" onclick="toggleCart()">
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Font_Awesome_5_solid_shopping-cart.svg" alt="Warenkorb">
         <span id="cartCount">0</span>
     </a>
@@ -305,12 +344,38 @@
     </div>
 
     <script>
-        let cartItems = 0;
+        let cartItems = [];
+        const cartCount = document.getElementById('cartCount');
+        const cartItemsList = document.getElementById('cartItemsList');
 
         function addToCart(productName) {
-            cartItems++;
-            document.getElementById('cartCount').textContent = cartItems;
+            cartItems.push(productName);
+            cartCount.textContent = cartItems.length;
+            updateCart();
             alert(productName + " wurde dem Warenkorb hinzugefügt!");
+        }
+
+        function updateCart() {
+            cartItemsList.innerHTML = '';
+            cartItems.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = item;
+                cartItemsList.appendChild(li);
+            });
+        }
+
+        function toggleCart() {
+            const cart = document.getElementById('cart');
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function closeCart() {
+            const cart = document.getElementById('cart');
+            cart.style.display = 'none';
+        }
+
+        function checkout() {
+            alert('Zur Kasse - Funktion noch nicht implementiert');
         }
     </script>
 
