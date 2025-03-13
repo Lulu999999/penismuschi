@@ -3,200 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylischer Shop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0a0a0a;
-            overflow: hidden;
-        }
-        .rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .drop {
-            position: absolute;
-            width: 2px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.6);
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            from {
-                transform: translateY(-100vh);
-            }
-            to {
-                transform: translateY(100vh);
-            }
-        }
-        .phone {
-            position: relative;
-            width: 375px;
-            height: 667px;
-            background-color: #000;
-            border-radius: 40px;
-            margin: 0 auto;
-            overflow: hidden;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-        .phone-header {
-            height: 50px;
-            background-color: #333;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
-        }
-        .phone-body {
-            padding: 10px;
-            height: calc(100% - 50px);
-            overflow: hidden;
-        }
-        .product-card {
-            background-color: #1f1f1f;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .add-to-cart {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .add-to-cart:hover {
-            background-color: #45a049;
-        }
-        .cart-icon {
-            width: 30px;
-            height: 30px;
-            background-color: #4CAF50;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .cart-icon:hover {
-            background-color: #45a049;
-        }
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .cart-content {
-            background: #1f1f1f;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+    <title>Komplexe Beispiel Webseite</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-white">
-    <div class="rain"></div>
-    <script>
-        function createRain() {
-            const rainContainer = document.querySelector(".rain");
-            for (let i = 0; i < 100; i++) {
-                let drop = document.createElement("div");
-                drop.classList.add("drop");
-                drop.style.left = `${Math.random() * 100}vw`;
-                drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                rainContainer.appendChild(drop);
-            }
-        }
-        createRain();
+<body>
 
-        const products = [
-            { id: 1, name: "Produkt 1: Modernes Gaming-Headset", price: 4.99, img: "https://cdn.discordapp.com/attachments/1347272413385199687/1348769240894672976/Screenshot_2025-03-07_200130.png?ex=67d3f67d&is=67d2a4fd&hm=55bdd6a3a63cc2268c9df70e8c4814df675da078a6620e9391b8a8d7adf5bc29&" },
-            { id: 2, name: "Produkt 2: Premium Bluetooth Lautsprecher", price: 3.99, img: "https://cdn.discordapp.com/attachments/1347272525301813388/1348769268988252210/Screenshot_2025-03-07_200104.png?ex=67d3f684&is=67d2a504&hm=2e679a48d09344d8d698d6d68690cefe761c2cabde26af35d3dc4856f7375cde&" },
-            { id: 3, name: "Produkt 3: Kompakte Smartphone Hülle", price: 4.49, img: "https://cdn.discordapp.com/attachments/1348998913062998017/1349009165556781108/Design_ohne_Titel_4.png?ex=67d42d30&is=67d2dbb0&hm=0610461f5bd82b5edc0516c3dc49460a851f15cf1c8bf3e43ba0f924266049e3&" },
-            { id: 4, name: "Produkt 4: Smartwatch Armband", price: 2.99, img: "https://cdn.discordapp.com/attachments/1347272619136909423/1348769289070706789/Screenshot_2025-03-07_200209.png?ex=67d3f689&is=67d2a509&hm=455e374ca8b2936ce74f1d208ec126cf9b8f777805235d448a15f188c5699ba1&" },
-            { id: 5, name: "Produkt 5: Stylische Sonnenbrille", price: 4.00, img: "https://cdn.discordapp.com/attachments/1347273205261275177/1348769319210848387/Design_ohne_Titel_1.png?ex=67d3f690&is=67d2a510&hm=c1e4e6b2937102c81a3e127a6b8f48a9b38081e6b6bb95d7642d231ee41e39b1&" },
-            { id: 6, name: "Produkt 6: Tragbare Powerbank", price: 5.00, img: "https://cdn.discordapp.com/attachments/1347273205261275177/1348769319210848387/Design_ohne_Titel_1.png?ex=67d3f690&is=67d2a510&hm=c1e4e6b2937102c81a3e127a6b8f48a9b38081e6b6bb95d7642d231ee41e39b1&" }
-        ];
+    <!-- Navigationsmenü -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#services">Dienstleistungen</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
 
-        const cart = [];
+    <!-- Hauptbereich -->
+    <header id="home">
+        <div class="container">
+            <h1>Willkommen auf unserer komplexen Webseite!</h1>
+            <p>Diese Seite zeigt ein erweitertes Beispiel für HTML, CSS und JavaScript.</p>
+        </div>
+    </header>
 
-        function updateCartCount() {
-            const cartCount = document.getElementById("cart-count");
-            cartCount.innerText = cart.length;
-        }
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            cart.push(product);
-            updateCartCount();
-            alert(`${product.name} wurde zum Warenkorb hinzugefügt!`);
-        }
-
-        function renderProducts() {
-            const productContainer = document.getElementById("product-container");
-            productContainer.innerHTML = ''; // Clear existing products
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.classList.add('product-card');
-                productCard.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="product-img">
-                    <h3 class="text-xl font-semibold text-gray-100 mt-4">${product.name}</h3>
-                    <p class="text-lg text-gray-300 mt-2">${product.price.toFixed(2)}€</p>
-                    <button onclick="addToCart(${product.id})" class="add-to-cart mt-4">In den Warenkorb</button>
-                `;
-                productContainer.appendChild(productCard);
-            });
-        }
-
-        window.onload = renderProducts;
-
-    </script>
-
-    <!-- MAIN SECTION -->
-    <section class="h-screen flex flex-col items-center justify-center text-center px-6 relative z-10">
-        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen in unserem <span class="text-blue-400">Shop!</span></h1>
-        <p class="mt-4 text-lg md:text-2xl text-gray-300 animate-fadeIn">Finde die besten Produkte für dich!</p>
-    </section>
-
-    <!-- PRODUCTS SECTION -->
-    <section id="products" class="py-16 bg-gray-800 text-center relative z-10">
-        <h2 class="text-4xl font-bold mb-6">Unsere Produkte</h2>
-        <div id="product-container" class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6"></div>
-    </section>
-
-    <!-- CART -->
-    <section class="flex justify-center items-center py-16 relative z-10">
-        <div class="cart-icon" onclick="alert('Warenkorb: ' + cart.map(item => item.name).join(', '))">
-            🛒
+    <!-- Über uns Bereich -->
+    <section id="about">
+        <div class="container">
+            <h2>Über uns</h2>
+            <p>Wir sind ein innovatives Unternehmen, das moderne Weblösungen für verschiedene Branchen anbietet.</p>
+            <p>Unsere Mission ist es, erstklassige digitale Erlebnisse zu schaffen, die sowohl funktional als auch benutzerfreundlich sind.</p>
         </div>
     </section>
+
+    <!-- Dienstleistungen Bereich -->
+    <section id="services">
+        <div class="container">
+            <h2>Unsere Dienstleistungen</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Webdesign</h3>
+                    <p>Wir gestalten ansprechende und benutzerfreundliche Websites, die Ihre Marke stärken.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Entwicklung</h3>
+                    <p>Wir bieten maßgeschneiderte Webanwendungen und -lösungen für Ihre Bedürfnisse.</p>
+                </div>
+                <div class="service-card">
+                    <h3>SEO Optimierung</h3>
+                    <p>Wir verbessern die Sichtbarkeit Ihrer Webseite in den Suchmaschinen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontaktformular -->
+    <section id="contact">
+        <div class="container">
+            <h2>Kontaktieren Sie uns</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Nachricht:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Absenden</button>
+            </form>
+            <p id="form-message"></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mein Unternehmen | Alle Rechte vorbehalten</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
