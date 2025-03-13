@@ -3,10 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Vercel-Seite</title>
+    <title>Stylische Webpage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
 </head>
-<body>
-    <h1>Hallo, Vercel!</h1>
-    <p>Dies ist eine einfache HTML-Seite.</p>
+<body class="bg-gray-900 text-white">
+
+    <!-- HERO SECTION -->
+    <section class="h-screen flex flex-col items-center justify-center text-center px-6">
+        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen auf der <span class="text-blue-400">geilsten Website!</span></h1>
+        <p class="mt-4 text-lg md:text-2xl text-gray-300 animate-fadeIn">Modern, schnell & stilvoll – genau wie du es willst.</p>
+        <a href="#features" class="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-lg transition duration-300 animate-fadeIn">Mehr erfahren</a>
+    </section>
+
+    <!-- FEATURE SECTION -->
+    <section id="features" class="py-16 bg-gray-800 text-center">
+        <h2 class="text-4xl font-bold mb-6">Warum diese Website?</h2>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
+            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold">🚀 Schnell</h3>
+                <p class="mt-2 text-gray-300">Optimiert für Top-Performance.</p>
+            </div>
+            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold">🎨 Schön</h3>
+                <p class="mt-2 text-gray-300">Modernes, elegantes Design.</p>
+            </div>
+            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold">📱 Responsiv</h3>
+                <p class="mt-2 text-gray-300">Sieht auf jedem Gerät gut aus.</p>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
