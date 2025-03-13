@@ -6,6 +6,17 @@
     <title>Stylische Webpage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @keyframes rain {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+        body {
+            background-image: url('https://source.unsplash.com/random/1600x900/?rain');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: rain 10s linear infinite;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -41,6 +52,11 @@
                 <p class="mt-2 text-gray-300">Sieht auf jedem Gerät gut aus.</p>
             </div>
         </div>
+    </section>
+
+    <!-- DISCORD WIDGET -->
+    <section class="flex justify-center items-center py-16">
+        <iframe src="https://discord.com/widget?id=1343649971517526066&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
     </section>
 
 </body>
