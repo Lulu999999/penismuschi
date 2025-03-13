@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylische Webpage</title>
+    <title>Stylischer Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -55,6 +55,52 @@
             height: calc(100% - 50px);
             overflow: hidden;
         }
+        .product-card {
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #45a049;
+        }
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cart-icon:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -71,43 +117,69 @@
             }
         }
         createRain();
+
+        const products = [
+            { id: 1, name: "Produkt 1", price: 19.99, img: "https://via.placeholder.com/300x200" },
+            { id: 2, name: "Produkt 2", price: 29.99, img: "https://via.placeholder.com/300x200" },
+            { id: 3, name: "Produkt 3", price: 39.99, img: "https://via.placeholder.com/300x200" },
+            { id: 4, name: "Produkt 4", price: 49.99, img: "https://via.placeholder.com/300x200" },
+            { id: 5, name: "Produkt 5", price: 59.99, img: "https://via.placeholder.com/300x200" }
+        ];
+
+        const cart = [];
+
+        function updateCartCount() {
+            const cartCount = document.getElementById("cart-count");
+            cartCount.innerText = cart.length;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            updateCartCount();
+            alert(`${product.name} wurde zum Warenkorb hinzugefügt!`);
+        }
+
+        function renderProducts() {
+            const productContainer = document.getElementById("product-container");
+            productContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+                productCard.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" class="product-img">
+                    <h3 class="text-xl mt-4">${product.name}</h3>
+                    <p class="mt-2 text-lg text-gray-400">${product.price}€</p>
+                    <button class="add-to-cart mt-4" onclick="addToCart(${product.id})">In den Warenkorb</button>
+                `;
+                productContainer.appendChild(productCard);
+            });
+        }
+
+        window.onload = () => {
+            renderProducts();
+            updateCartCount();
+        };
     </script>
-    
+
     <!-- HERO SECTION -->
     <section class="h-screen flex flex-col items-center justify-center text-center px-6 relative z-10">
-        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen auf der <span class="text-blue-400">hartesten Website!</span></h1>
+        <h1 class="text-5xl md:text-7xl font-bold animate-fadeIn">Willkommen in unserem <span class="text-blue-400">Shop!</span></h1>
         <p class="mt-4 text-lg md:text-2xl text-gray-300 animate-fadeIn">Modern, schnell & stilvoll – genau wie du es willst.</p>
-        <a href="#features" class="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-lg transition duration-300 animate-fadeIn">Mehr erfahren</a>
+        <a href="#shop" class="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-lg transition duration-300 animate-fadeIn">Jetzt einkaufen</a>
     </section>
     
-    <!-- FEATURE SECTION -->
-    <section id="features" class="py-16 bg-gray-800 text-center relative z-10">
-        <h2 class="text-4xl font-bold mb-6">Warum diese Website?</h2>
-        <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
-            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-semibold">🚀 Schnell</h3>
-                <p class="mt-2 text-gray-300">Optimiert für Top-Performance.</p>
-            </div>
-            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-semibold">🎨 Schön</h3>
-                <p class="mt-2 text-gray-300">Modernes, elegantes Design.</p>
-            </div>
-            <div class="p-6 bg-gray-700 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-semibold">📱 Responsiv</h3>
-                <p class="mt-2 text-gray-300">Sieht auf jedem Gerät gut aus.</p>
-            </div>
-        </div>
+    <!-- SHOP SECTION -->
+    <section id="shop" class="py-16 bg-gray-800 text-center relative z-10">
+        <h2 class="text-4xl font-bold mb-6">Unsere Produkte</h2>
+        <div id="product-container" class="grid md:grid-cols-3 gap-6 px-6"></div>
     </section>
-    
-    <!-- PHONE SECTION -->
-    <section class="flex justify-center items-center py-16 relative z-10">
-        <div class="phone">
-            <div class="phone-header"></div>
-            <div class="phone-body">
-                <!-- DISCORD WIDGET -->
-                <iframe src="https://discord.com/widget?id=1343649971517526066&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-            </div>
+
+    <!-- CART ICON -->
+    <div class="fixed bottom-10 right-10">
+        <div class="cart-icon" onclick="alert('Warenkorb anzeigen')">
+            <span id="cart-count">0</span>
         </div>
-    </section>
+    </div>
 </body>
 </html>
