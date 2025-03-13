@@ -3,341 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>GoodBoyService - Mitigierte Produkte</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <title>Goodboy Service Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Allgemeine Styles */
         body {
-            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #111, #1a1a1a);
-            color: #fff;
-            overflow-y: auto;
-            height: 100vh;
-        }
-
-        /* Header */
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #007bff;
-            padding: 40px 0;
-            text-align: center;
-            border-bottom: 2px solid #007bff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        header p {
-            font-size: 1.3rem;
-            margin-top: 10px;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 12px 0;
-            text-align: center;
-            border-bottom: 2px solid #007bff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        nav ul li a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #fff;
-            border-bottom: 2px solid #007bff;
-        }
-
-        /* Main Content */
-        section {
-            padding: 60px 15px;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: #ddd;
-            line-height: 1.6;
-        }
-
-        /* Produkte Sektion */
-        #products {
             padding: 20px;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 2rem;
+            color: cyan;
+            text-shadow: 0 0 15px cyan;
+            margin-bottom: 20px;
+        }
+
+        .product-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
         }
 
-        .product {
-            background-color: rgba(30, 30, 30, 0.9);
-            width: 280px;
-            margin: 15px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.5);
-        }
-
-        .product h3 {
-            font-size: 1.7rem;
-            color: #007bff;
-            margin-bottom: 15px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .product p {
-            font-size: 1.1rem;
-            color: #ddd;
-        }
-
-        .product .price {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #fff;
-            margin-top: 15px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-        }
-
-        .product button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .product button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        footer {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #007bff;
-            text-align: center;
-            padding: 20px;
-            border-top: 2px solid #007bff;
-            margin-top: 30px;
-        }
-
-        /* Warenkorb und Discord Button */
-        #cartButton {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
+        .product-card {
+            background-color: #222;
             border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 0 15px cyan;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px cyan;
+        }
+
+        .cart-container {
             position: fixed;
-            bottom: 20px;
+            top: 10px;
             right: 20px;
-            z-index: 10;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        #cartButton:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        #discordLink {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1.2rem;
+            background: cyan;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: black;
             font-weight: bold;
-            text-transform: uppercase;
-            padding: 12px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 15px cyan;
         }
 
-        #discordLink:hover {
-            color: #fff;
-            border-bottom: 2px solid #007bff;
-        }
-
-        /* Regen-Effekt */
-        .rain {
-            position: absolute;
+        .cart-overlay {
+            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: -100%;
+            width: 300px;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.3;
+            background: black;
+            padding: 20px;
+            transition: 0.3s ease;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px cyan;
         }
 
-        .drop {
-            position: absolute;
-            background-color: #ffffff;
-            width: 2px;
-            height: 15px;
-            animation: fall 1.2s infinite linear;
+        .cart-overlay.active {
+            right: 0;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
         }
 
-        .drop:nth-child(odd) {
-            animation-duration: 1.5s;
+        .cart-clear, .cart-buy {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .drop:nth-child(even) {
-            animation-duration: 1s;
+        .cart-clear {
+            background: red;
+            color: white;
         }
 
+        .cart-buy {
+            background: green;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Willkommen bei GoodBoyService!</h1>
-        <p>Dein Shop für die besten Tools</p>
-    </header>
+    <h1 class="header">Goodboy Service</h1>
 
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Startseite</a></li>
-            <li><a href="#products">Mitigierte Produkte</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-            <li><a href="https://discord.gg/DEIN_DISCORD_LINK" id="discordLink" target="_blank">Join Discord</a></li>
-        </ul>
-    </nav>
+    <div class="cart-container" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
-    <!-- Main Content -->
-    <section id="home">
-        <h2>Startseite</h2>
-        <p>Entdecke unsere exklusiven Mitigierten Produkte, die speziell ausgewählt wurden, um dir die beste Erfahrung in der Welt der Technologie zu bieten.</p>
-    </section>
+    <div class="product-container" id="product-container"></div>
 
-    <!-- Mitigierte Produkte Sektion -->
-    <section id="products">
-        <h2>Unsere Mitigierten Produkte</h2>
-
-       
-        <!-- Produkt 2 -->
-        <div class="product">
-            <h3>Gaming Maus ABC</h3>
-            <img src="https://cdn.discordapp.com/attachments/1347272413385199687/1348769240894672976/Screenshot_2025-03-07_200130.png?ex=67d3f67d&is=67d2a4fd&hm=55bdd6a3a63cc2268c9df70e8c4814df675da078a6620e9391b8a8d7adf5bc29&" alt="Gaming Maus ABC">
-            <p>Präzise Gaming Maus mit einstellbaren DPI-Werten und RGB-Beleuchtung.</p>
-            <p class="price">Preis: 49,99 €</p>
-            <button onclick="addToCart('Gaming Maus ABC')">In den Warenkorb</button>
-        </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; GoodBoyService.</p>
-    </footer>
-
-    <!-- Warenkorb Button -->
-    <button id="cartButton" onclick="toggleCart()">Warenkorb</button>
-
-    <!-- Warenkorb Popup -->
-    <div id="cart" style="display:none;">
-        <h3>Dein Warenkorb</h3>
-        <ul id="cartItemsList"></ul>
-        <button onclick="checkout()">Zur Kasse</button>
-        <button onclick="closeCart()">Schließen</button>
-    </div>
-
-    <!-- Regen-Effekt -->
-    <div class="rain">
-        <div class="drop" style="left: 10%;"></div>
-        <div class="drop" style="left: 20%;"></div>
-        <div class="drop" style="left: 30%;"></div>
-        <div class="drop" style="left: 40%;"></div>
-        <div class="drop" style="left: 50%;"></div>
-        <div class="drop" style="left: 60%;"></div>
-        <div class="drop" style="left: 70%;"></div>
-        <div class="drop" style="left: 80%;"></div>
-        <div class="drop" style="left: 90%;"></div>
+    <div class="cart-overlay" id="cart-overlay">
+        <h2>Warenkorb</h2>
+        <div id="cart-items"></div>
+        <p><strong>Gesamt: <span id="cart-total">0.00</span>€</strong></p>
+        <button class="cart-clear" onclick="clearCart()">Warenkorb leeren</button>
+        <button class="cart-buy" onclick="buyItems()">Kaufen</button>
     </div>
 
     <script>
-        let cartItems = [];
-        const cartCount = document.getElementById('cartButton');
-        const cartItemsList = document.getElementById('cartItemsList');
+        let cart = [];
 
-        function addToCart(productName) {
-            cartItems.push(productName);
-            cartCount.textContent = `Warenkorb (${cartItems.length})`;
+        function addToCart(name, price) {
+            cart.push({ name, price });
             updateCart();
-            alert(productName + " wurde dem Warenkorb hinzugefügt!");
+            alert(name + " wurde zum Warenkorb hinzugefügt!");
         }
 
         function updateCart() {
-            cartItemsList.innerHTML = '';
-            cartItems.forEach(item => {
-                let li = document.createElement('li');
-                li.textContent = item;
-                cartItemsList.appendChild(li);
+            let total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+            document.getElementById("cart-count").innerText = cart.length;
+            document.getElementById("cart-total").innerText = total;
+            document.getElementById("cart-items").innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    ${item.name} - ${item.price.toFixed(2)}€ 
+                    <button onclick="removeItem(${index})">❌</button>
+                </div>
+            `).join("");
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCart();
+        }
+
+        function buyItems() {
+            if (cart.length === 0) {
+                alert("Der Warenkorb ist leer!");
+                return;
+            }
+            
+            let orderDetails = cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n");
+            let message = {
+                content: "**Neue Bestellung erhalten!**\n" + orderDetails + "\n\nGesamt: " + document.getElementById("cart-total").innerText + "€"
+            };
+
+            fetch("https://discord.com/api/webhooks/1349850414543142912/6ujUtioGiTKVrXMrs-dQbB83Ss5799TzqwczsAdxyeroOXcvaX-ALTRetR25_RywY-D5", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(message)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Kauf abgeschlossen! Die Bestellung wurde an Discord gesendet.");
+                console.log("Webhook Antwort:", data);
+                clearCart();
+            })
+            .catch(error => {
+                alert("Fehler beim Senden der Bestellung! Überprüfe die Konsole (F12 > Console).");
+                console.error("Fehler:", error);
             });
         }
 
         function toggleCart() {
-            const cart = document.getElementById('cart');
-            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+            document.getElementById("cart-overlay").classList.toggle("active");
         }
 
-        function closeCart() {
-            const cart = document.getElementById('cart');
-            cart.style.display = 'none';
-        }
-
-        function checkout() {
-            alert('Zur Kasse - Funktion noch nicht implementiert');
-        }
+        window.onload = () => {
+            document.getElementById("product-container").innerHTML = `
+                <div class="product-card" onclick="addToCart('Gaming Headset', 4.99)">Gaming Headset - 4.99€</div>
+                <div class="product-card" onclick="addToCart('Bluetooth Lautsprecher', 3.99)">Bluetooth Lautsprecher - 3.99€</div>
+                <div class="product-card" onclick="addToCart('Smartphone Hülle', 4.49)">Smartphone Hülle - 4.49€</div>
+                <div class="product-card" onclick="addToCart('Stylische Sonnenbrille', 4.00)">Stylische Sonnenbrille - 4.00€</div>
+                <div class="product-card" onclick="addToCart('Kabellose Maus', 5.99)">Kabellose Maus - 5.99€</div>
+                <div class="product-card" onclick="addToCart('Mechanische Tastatur', 9.99)">Mechanische Tastatur - 9.99€</div>
+                <div class="product-card" onclick="addToCart('Gaming Monitor', 199.99)">Gaming Monitor - 199.99€</div>
+                <div class="product-card" onclick="addToCart('Externe Festplatte 1TB', 49.99)">Externe Festplatte 1TB - 49.99€</div>
+                <div class="product-card" onclick="addToCart('Gaming Stuhl', 149.99)">Gaming Stuhl - 149.99€</div>
+                <div class="product-card" onclick="addToCart('Webcam 1080p', 29.99)">Webcam 1080p - 29.99€</div>
+            `;
+        };
     </script>
 
 </body>
