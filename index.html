@@ -3,120 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TechConnect - Deine Anlaufstelle für Technologie-News</title>
+    <title>Goodboy Service Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Intro Screen */
+        .intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: cyan;
+            text-shadow: 0 0 20px cyan;
+            animation: fadeOut 3s forwards 2s;
+            z-index: 2000;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* Regen-Effekt */
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .drop {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: rgba(0, 255, 255, 0.6);
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-100vh); }
+            to { transform: translateY(100vh); }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #111;
+            box-shadow: 0 4px 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: cyan;
+            text-shadow: 0 0 10px cyan;
+        }
+
+        /* Warenkorb */
+        .cart-icon {
+            width: 50px;
+            height: 50px;
+            background-color: cyan;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        /* Produktliste */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .product-card {
+            background-color: #222;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .add-to-cart {
+            background-color: black;
+            color: cyan;
+            padding: 10px 20px;
+            border: 2px solid cyan;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 0 0 10px cyan;
+            transition: 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: cyan;
+            color: black;
+            box-shadow: 0 0 20px cyan;
+        }
+
+        /* Warenkorb Overlay */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 300px;
+            height: 100%;
+            background: #111;
+            box-shadow: -5px 0 15px rgba(0, 255, 255, 0.5);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .cart-overlay.active {
+            right: 0;
+        }
+
+        .cart-close {
+            align-self: flex-end;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .cart-clear {
+            background: red;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Discord Button */
+        .discord-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: cyan;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Willkommen bei TechConnect!</h1>
-        <p>Die neuesten Nachrichten, Artikel und Updates aus der Welt der Technologie.</p>
+    <!-- Intro Screen -->
+    <div class="intro">Willkommen bei Goodboy Service...</div>
+
+    <!-- Regen Animation -->
+    <div class="rain"></div>
+
+    <!-- Hintergrundmusik -->
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-moose.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Header mit Warenkorb -->
+    <header class="header">
+        <h1>Goodboy Service</h1>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒
+            <span id="cart-count" class="cart-count">0</span>
+        </div>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Startseite</a></li>
-            <li><a href="#news">Technologie-News</a></li>
-            <li><a href="#reviews">Produktbewertungen</a></li>
-            <li><a href="#about">Über uns</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
-    </nav>
+    <!-- Produktbereich -->
+    <section class="products" id="product-container"></section>
 
-    <section id="home">
-        <h2>Startseite</h2>
-        <p>Willkommen auf TechConnect, der Plattform, die dir alles rund um die neuesten Technologien, Innovationen und Produkte bietet. Egal, ob du an den neuesten Smartphones, Laptops oder Softwarelösungen interessiert bist, hier findest du alle relevanten Informationen.</p>
-    </section>
+    <!-- Warenkorb Overlay -->
+    <div class="cart-overlay" id="cart-overlay">
+        <span class="cart-close" onclick="toggleCart()">✖</span>
+        <h2>Warenkorb</h2>
+        <div class="cart-items" id="cart-items"></div>
+        <p class="cart-total" id="cart-total">Gesamt: 0.00€</p>
+        <div class="cart-clear" onclick="clearCart()">Warenkorb leeren</div>
+    </div>
 
-    <section id="products">
-        <h2>Unsere Produkte</h2>
-        
-        <!-- Produkt 1: Gaming Headset -->
-        <div class="product">
-            <h3>Gaming Headset XYZ</h3>
-            <img src="https://example.com/headset-image.jpg" alt="Gaming Headset XYZ" style="width: 200px; height: auto;">
-            <p>Hochwertiges Gaming Headset mit Surround-Sound und komfortablem Design für stundenlangen Spielspaß.</p>
-            <p>Preis: 99,99 €</p>
-            <button onclick="addToCart('Gaming Headset XYZ')">In den Warenkorb</button>
-        </div>
-
-        <!-- Produkt 2: Gaming Maus -->
-        <div class="product">
-            <h3>Gaming Maus ABC</h3>
-            <img src="https://example.com/mouse-image.jpg" alt="Gaming Maus ABC" style="width: 200px; height: auto;">
-            <p>Präzise Gaming Maus mit einstellbaren DPI-Werten und RGB-Beleuchtung.</p>
-            <p>Preis: 49,99 €</p>
-            <button onclick="addToCart('Gaming Maus ABC')">In den Warenkorb</button>
-        </div>
-
-        <!-- Produkt 3: Gaming Tastatur -->
-        <div class="product">
-            <h3>Gaming Tastatur 123</h3>
-            <img src="https://example.com/keyboard-image.jpg" alt="Gaming Tastatur 123" style="width: 200px; height: auto;">
-            <p>Mechanische Gaming-Tastatur mit RGB-Hintergrundbeleuchtung und schneller Reaktionszeit.</p>
-            <p>Preis: 79,99 €</p>
-            <button onclick="addToCart('Gaming Tastatur 123')">In den Warenkorb</button>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 TechConnect. Alle Rechte vorbehalten.</p>
-    </footer>
-
-    <!-- Discord Link Button mit Hover-Effekten -->
-    <a href="https://discord.gg/DEIN_DISCORD_LINK" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Discord_Logo_2023.png" alt="Join Discord" 
-            style="position: fixed; bottom: 10px; right: 80px; width: 60px; height: 60px; 
-                   transition: transform 0.3s ease, opacity 0.3s ease;">
-    </a>
-
-    <!-- Warenkorb Button -->
-    <a href="#cart" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Font_Awesome_5_solid_shopping-cart.svg" alt="Warenkorb" 
-            style="position: fixed; bottom: 10px; right: 10px; width: 60px; height: 60px;
-                   transition: transform 0.3s ease, opacity 0.3s ease;">
-        <span id="cartCount" style="position: absolute; bottom: 0; right: 0; background-color: red; color: white; font-size: 16px; border-radius: 50%; padding: 5px 10px;">0</span>
-    </a>
+    <!-- Discord-Link -->
+    <a href="https://discord.gg/QgFSaXnS" class="discord-link" target="_blank">Join Discord</a>
 
     <script>
-        // Füge einen Hover-Effekt hinzu, der das Discord-Symbol vergrößert und die Opazität ändert
-        const discordIcon = document.querySelectorAll('a img')[0];
-        
-        discordIcon.addEventListener('mouseover', () => {
-            discordIcon.style.transform = 'scale(1.1)';  // Vergrößern
-            discordIcon.style.opacity = '0.8';  // Leicht transparent machen
-        });
-        
-        discordIcon.addEventListener('mouseout', () => {
-            discordIcon.style.transform = 'scale(1)';  // Zurück zur normalen Größe
-            discordIcon.style.opacity = '1';  // Wieder voll sichtbar
-        });
+        function createRain() {
+            const rainContainer = document.querySelector(".rain");
+            for (let i = 0; i < 100; i++) {
+                let drop = document.createElement("div");
+                drop.classList.add("drop");
+                drop.style.left = `${Math.random() * 100}vw`;
+                drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                rainContainer.appendChild(drop);
+            }
+        }
+        createRain();
 
-        // Füge einen Hover-Effekt für den Warenkorb hinzu
-        const cartIcon = document.querySelectorAll('a img')[1];
-        const cartCount = document.getElementById('cartCount');
-
-        cartIcon.addEventListener('mouseover', () => {
-            cartIcon.style.transform = 'scale(1.1)';
-            cartIcon.style.opacity = '0.8';
-        });
-
-        cartIcon.addEventListener('mouseout', () => {
-            cartIcon.style.transform = 'scale(1)';
-            cartIcon.style.opacity = '1';
-        });
-
-        // Beispiel für das Hinzufügen von Artikeln zum Warenkorb
-        let cartItems = 0;
-
-        function addToCart(productName) {
-            cartItems++;
-            cartCount.textContent = cartItems;
-            alert(productName + " wurde dem Warenkorb hinzugefügt!");
+        function toggleCart() {
+            document.getElementById("cart-overlay").classList.toggle("active");
         }
 
-        // Dummy Funktion um Artikel zum Warenkorb hinzuzufügen
-        setTimeout(() => addToCart('Gaming Headset XYZ'), 2000); // Beispiel: Artikel nach 2 Sekunden hinzufügen
+        window.onload = () => {
+            document.getElementById("product-container").innerHTML = `
+                <div class="product-card" onclick="alert('Produkt hinzugefügt!')"><h3>Gaming Headset</h3></div>
+                <div class="product-card" onclick="alert('Produkt hinzugefügt!')"><h3>Bluetooth Lautsprecher</h3></div>
+            `;
+        };
     </script>
 
 </body>
