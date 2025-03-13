@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -102,6 +101,25 @@
         .cart-icon:hover {
             background-color: #45a049;
         }
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .cart-content {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -122,7 +140,10 @@
         const products = [
             { id: 1, name: "Produkt 1", price: 19.99, img: "https://cdn.discordapp.com/attachments/1347272413385199687/1348769240894672976/Screenshot_2025-03-07_200130.png?ex=67d3f67d&is=67d2a4fd&hm=55bdd6a3a63cc2268c9df70e8c4814df675da078a6620e9391b8a8d7adf5bc29&" },
             { id: 2, name: "Produkt 2", price: 29.99, img: "https://cdn.discordapp.com/attachments/1347272525301813388/1348769268988252210/Screenshot_2025-03-07_200104.png?ex=67d3f684&is=67d2a504&hm=2e679a48d09344d8d698d6d68690cefe761c2cabde26af35d3dc4856f7375cde&" },
-            { id: 3, name: "Produkt 3", price: 39.99, img: "https://cdn.discordapp.com/attachments/1348998913062998017/1349009165556781108/Design_ohne_Titel_4.png?ex=67d42d30&is=67d2dbb0&hm=0610461f5bd82b5edc0516c3dc49460a851f15cf1c8bf3e43ba0f924266049e3&" }
+            { id: 3, name: "Produkt 3", price: 39.99, img: "https://cdn.discordapp.com/attachments/1348998913062998017/1349009165556781108/Design_ohne_Titel_4.png?ex=67d42d30&is=67d2dbb0&hm=0610461f5bd82b5edc0516c3dc49460a851f15cf1c8bf3e43ba0f924266049e3&" },
+            { id: 4, name: "Produkt 4", price: 24.99, img: "https://cdn.discordapp.com/attachments/1347272619136909423/1348769289070706789/Screenshot_2025-03-07_200209.png?ex=67d3f689&is=67d2a509&hm=455e374ca8b2936ce74f1d208ec126cf9b8f777805235d448a15f188c5699ba1&" },
+            { id: 5, name: "Produkt 5", price: 49.99, img: "https://cdn.discordapp.com/attachments/1348998913062998017/1349009165556781108/Design_ohne_Titel_4.png?ex=67d42d30&is=67d2dbb0&hm=0610461f5bd82b5edc0516c3dc49460a851f15cf1c8bf3e43ba0f924266049e3&" },
+            { id: 6, name: "Produkt 6", price: 34.99, img: "https://cdn.discordapp.com/attachments/1347272619136909423/1348769289070706789/Screenshot_2025-03-07_200209.png?ex=67d3f689&is=67d2a509&hm=455e374ca8b2936ce74f1d208ec126cf9b8f777805235d448a15f188c5699ba1&" }
         ];
 
         const cart = [];
@@ -155,6 +176,39 @@
             });
         }
 
+        function showCart() {
+            const cartOverlay = document.getElementById("cart-overlay");
+            const cartContent = document.getElementById("cart-content");
+            cartContent.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartContent.innerHTML = `<p class="text-white">Dein Warenkorb ist leer!</p>`;
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement("div");
+                    cartItem.classList.add("cart-item", "text-white", "py-2");
+                    cartItem.innerHTML = `
+                        <h4 class="text-lg">${item.name}</h4>
+                        <p>${item.price}€</p>
+                    `;
+                    cartContent.appendChild(cartItem);
+                });
+
+                const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+                const totalPriceElement = document.createElement("div");
+                totalPriceElement.classList.add("text-white", "mt-4");
+                totalPriceElement.innerHTML = `<strong>Gesamt: ${totalPrice}€</strong>`;
+                cartContent.appendChild(totalPriceElement);
+            }
+
+            cartOverlay.style.display = 'flex';
+        }
+
+        function closeCart() {
+            const cartOverlay = document.getElementById("cart-overlay");
+            cartOverlay.style.display = 'none';
+        }
+
         window.onload = () => {
             renderProducts();
             updateCartCount();
@@ -176,9 +230,14 @@
 
     <!-- CART ICON -->
     <div class="fixed bottom-10 right-10">
-        <div class="cart-icon" onclick="alert('Warenkorb anzeigen')">
+        <div class="cart-icon" onclick="showCart()">
             <span id="cart-count">0</span>
         </div>
+    </div>
+
+    <!-- CART OVERLAY -->
+    <div id="cart-overlay" class="cart-overlay" onclick="closeCart()">
+        <div id="cart-content" class="cart-content"></div>
     </div>
 </body>
 </html>
