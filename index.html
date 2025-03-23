@@ -3,199 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodboy Service Website</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Tools - No Face 999</title>
     <style>
         body {
-            background-color: #0a0a0a;
-            font-family: 'Orbitron', sans-serif;
-            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 50px 0;
         }
-
-        .header {
-            font-size: 2rem;
-            color: cyan;
-            text-shadow: 0 0 15px cyan;
-            margin-bottom: 20px;
+        h1 {
+            color: #ff0000;
+            text-transform: uppercase;
         }
-
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .product-card {
-            background-color: #222;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            width: 220px;
-            box-shadow: 0 0 15px cyan;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px cyan;
-        }
-
-        .cart-container {
-            position: fixed;
-            top: 10px;
-            right: 20px;
-            background: cyan;
-            padding: 10px 20px;
-            border-radius: 10px;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 15px cyan;
-        }
-
-        .cart-overlay {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100%;
-            background: black;
-            padding: 20px;
-            transition: 0.3s ease;
-            overflow-y: auto;
-            box-shadow: -5px 0 15px cyan;
-        }
-
-        .cart-overlay.active {
-            right: 0;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
-        .cart-clear, .cart-buy {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            cursor: pointer;
+        .tool-option {
+            margin: 20px;
+            font-size: 24px;
             font-weight: bold;
         }
-
-        .cart-clear {
-            background: red;
-            color: white;
+        .tool-option a {
+            color: #ff0000;
+            text-decoration: none;
         }
-
-        .cart-buy {
-            background: green;
-            color: white;
+        .tool-option a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
-    <h1 class="header">Goodboy Service</h1>
-
-    <div class="cart-container" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
-
-    <div class="product-container" id="product-container"></div>
-
-    <div class="cart-overlay" id="cart-overlay">
-        <h2>Warenkorb</h2>
-        <div id="cart-items"></div>
-        <p><strong>Gesamt: <span id="cart-total">0.00</span>€</strong></p>
-        <button class="cart-clear" onclick="clearCart()">Warenkorb leeren</button>
-        <button class="cart-buy" onclick="buyItems()">Kaufen</button>
+    <h1>Wähle ein Tool aus</h1>
+    <div class="tool-option">
+        <a href="tool1.html">Tool 1</a>
     </div>
-
-    <script>
-        let cart = [];
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-            alert(name + " wurde zum Warenkorb hinzugefügt!");
-        }
-
-        function updateCart() {
-            let total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
-            document.getElementById("cart-count").innerText = cart.length;
-            document.getElementById("cart-total").innerText = total;
-            document.getElementById("cart-items").innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    ${item.name} - ${item.price.toFixed(2)}€ 
-                    <button onclick="removeItem(${index})">❌</button>
-                </div>
-            `).join("");
-        }
-
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function clearCart() {
-            cart = [];
-            updateCart();
-        }
-
-        function buyItems() {
-            if (cart.length === 0) {
-                alert("Der Warenkorb ist leer!");
-                return;
-            }
-            
-            let orderDetails = cart.map(item => `- ${item.name}: ${item.price.toFixed(2)}€`).join("\n");
-            let message = {
-                content: "**Neue Bestellung erhalten!**\n" + orderDetails + "\n\nGesamt: " + document.getElementById("cart-total").innerText + "€"
-            };
-
-            fetch("https://discord.com/api/webhooks/1349850414543142912/6ujUtioGiTKVrXMrs-dQbB83Ss5799TzqwczsAdxyeroOXcvaX-ALTRetR25_RywY-D5", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(message)
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert("Kauf abgeschlossen! Die Bestellung wurde an Discord gesendet.");
-                console.log("Webhook Antwort:", data);
-                clearCart();
-            })
-            .catch(error => {
-                alert("Fehler beim Senden der Bestellung! Überprüfe die Konsole (F12 > Console).");
-                console.error("Fehler:", error);
-            });
-        }
-
-        function toggleCart() {
-            document.getElementById("cart-overlay").classList.toggle("active");
-        }
-
-        window.onload = () => {
-            document.getElementById("product-container").innerHTML = `
-                <div class="product-card" onclick="addToCart('Gaming Headset', 4.99)">Gaming Headset - 4.99€</div>
-                <div class="product-card" onclick="addToCart('Bluetooth Lautsprecher', 3.99)">Bluetooth Lautsprecher - 3.99€</div>
-                <div class="product-card" onclick="addToCart('Smartphone Hülle', 4.49)">Smartphone Hülle - 4.49€</div>
-                <div class="product-card" onclick="addToCart('Stylische Sonnenbrille', 4.00)">Stylische Sonnenbrille - 4.00€</div>
-                <div class="product-card" onclick="addToCart('Kabellose Maus', 5.99)">Kabellose Maus - 5.99€</div>
-                <div class="product-card" onclick="addToCart('Mechanische Tastatur', 9.99)">Mechanische Tastatur - 9.99€</div>
-                <div class="product-card" onclick="addToCart('Gaming Monitor', 199.99)">Gaming Monitor - 199.99€</div>
-                <div class="product-card" onclick="addToCart('Externe Festplatte 1TB', 49.99)">Externe Festplatte 1TB - 49.99€</div>
-                <div class="product-card" onclick="addToCart('Gaming Stuhl', 149.99)">Gaming Stuhl - 149.99€</div>
-                <div class="product-card" onclick="addToCart('Webcam 1080p', 29.99)">Webcam 1080p - 29.99€</div>
-            `;
-        };
-    </script>
-
+    <div class="tool-option">
+        <a href="tool2.html">Tool 2</a>
+    </div>
+    <div class="tool-option">
+        <a href="tool3.html">Tool 3</a>
+    </div>
+    <div class="tool-option">
+        <a href="tool4.html">Tool 4</a>
+    </div>
+    <br>
+    <a href="index.html" style="color: #fff;">Zurück zur Startseite</a>
 </body>
 </html>
