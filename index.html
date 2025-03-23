@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Face 999</title>
+    <title>Tools - No Face 999</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,54 +17,35 @@
             color: #ff0000;
             text-transform: uppercase;
         }
-        nav {
-            background-color: #333;
-            padding: 10px;
-        }
-        nav a {
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            text-transform: uppercase;
+        .tool-option {
+            margin: 20px;
+            font-size: 24px;
             font-weight: bold;
         }
-        nav a:hover {
-            background-color: #555;
+        .tool-option a {
+            color: #ff0000;
+            text-decoration: none;
         }
-        .discord-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-        }
-        .discord-link {
-            width: 150px;
-        }
-        .footer {
-            font-size: 12px;
-            color: #bbb;
-            margin-top: 200px;
+        .tool-option a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Startseite</a>
-        <a href="tools.html">Tools</a>
-    </nav>
-
-    <h1>Gut, dass du hier gelandet bist, mein Freund!</h1>
-    <p>Hier gibt es viel zu entdecken bei uns. Viel Spaß!</p>
-
-    <div class="discord-container">
-        <a href="https://discord.com" target="_blank">
-            <img class="discord-link" src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
-        </a>
-        <a href="index.html" class="startseite-link">Zur Startseite</a>
+    <h1>Wähle ein Tool aus</h1>
+    <div class="tool-option">
+        <a href="tool1.html">Tool 1</a>
     </div>
-
-    <p class="footer">dein no face team</p>
-    <p class="footer-999">999</p>
+    <div class="tool-option">
+        <a href="tool2.html">Tool 2</a>
+    </div>
+    <div class="tool-option">
+        <a href="tool3.html">Tool 3</a>
+    </div>
+    <div class="tool-option">
+        <a href="tool4.html">Tool 4</a>
+    </div>
+    <br>
+    <a href="index.html" style="color: #fff;">Zurück zur Startseite</a>
 </body>
 </html>
